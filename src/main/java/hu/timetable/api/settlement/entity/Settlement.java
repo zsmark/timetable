@@ -1,6 +1,7 @@
 package hu.timetable.api.settlement.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import hu.timetable.api.common.entity.AbstractEntity;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,9 +27,11 @@ public class Settlement extends AbstractEntity{
     @Column(name = "ID", unique = true, nullable = false, precision = 22)
     private Integer id;
 
+    @JsonProperty("Név")
     @Column(name = "NAME")
     private String name;
 
+    @JsonProperty("Lakosság")
     @Column(name = "POPULATION")
     private Long population;
 }

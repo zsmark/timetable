@@ -19,8 +19,14 @@ public class FlightController {
     @Autowired
     private FlightService service;
 
+    @RequestMapping(path = FLIGHT_CONTEXT + "findAll")
+    public List<Flight> findAll(){
+        return service.findAll();
+    }
+
     @RequestMapping(path = FLIGHT_CONTEXT + "findByDepAndDest")
-    public List<Flight> findByDepAndDest(@RequestParam("dep") String dep,@RequestParam("dest") String dest){
+    public List<Flight> findByDepAndDest(@RequestParam(value = "dep",required = false) String dep,
+                                         @RequestParam(value = "dest",required = false) String dest){
         return service.findByCities(dep,dest);
     }
 }

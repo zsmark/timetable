@@ -1,6 +1,7 @@
 package hu.timetable.api.airline.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import hu.timetable.api.common.entity.AbstractEntity;
 import hu.timetable.api.flight.entity.Flight;
 import lombok.Getter;
@@ -29,6 +30,7 @@ public class AirLine extends AbstractEntity{
     @Column(name = "ID", unique = true, nullable = false, precision = 22)
     private Integer id;
 
+    @JsonProperty("Név")
     @Column(name = "NAME")
     private String name;
 

@@ -1,6 +1,7 @@
 package hu.timetable.api.flight.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import hu.timetable.api.airline.entity.AirLine;
 import hu.timetable.api.common.entity.AbstractEntity;
 import hu.timetable.api.settlement.entity.Settlement;
@@ -34,16 +35,20 @@ public class Flight extends AbstractEntity {
     @JoinColumn(name = "AIR_LINE_ID")
     private AirLine airLineId;
 
+    @JsonProperty("Távolság")
     @Column(name = "DISTANCE")
     private Long distance;
 
+    @JsonProperty("Repülési idő")
     @Column(name = "PERIOD")
     private LocalTime period;
 
+    @JsonProperty("Indulás")
     @ManyToOne
     @JoinColumn(name = "DEPARTURE")
     private Settlement departure;
 
+    @JsonProperty("Cél")
     @ManyToOne
     @JoinColumn(name = "DESTINATION")
     private Settlement destintaion;
