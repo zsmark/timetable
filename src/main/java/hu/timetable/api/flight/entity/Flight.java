@@ -14,9 +14,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.StringJoiner;
+import java.util.*;
 
 /**
  * Created by zsidm on 2017. 06. 14..
@@ -70,6 +68,11 @@ public class Flight extends AbstractEntity implements Comparable<Flight>{
     public String getDistanceInString(){
         return distance + " km";
     }
+
+    @Transient
+    private List<Flight> adjacentFlights = new LinkedList<>();
+    @Transient
+    private List<Flight> shortestPath = new LinkedList<>();
 
     @Override
     public boolean equals(Object o) {
