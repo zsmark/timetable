@@ -10,9 +10,9 @@
     <changeSet author="zsidom" id="2" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <createSequence sequenceName="SEQ_FLIGHT"/>
     </changeSet>
-    <changeSet author="zsidom" id="3" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createSequence sequenceName="SEQ_SETTLEMENT"/>
-    </changeSet>
+    <!--<changeSet author="zsidom" id="3" objectQuotingStrategy="QUOTE_ALL_OBJECTS">-->
+        <!--<createSequence sequenceName="SEQ_SETTLEMENT"/>-->
+    <!--</changeSet>-->
 
     <changeSet author="zsidom" id="4" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <createTable tableName="AIR_LINE">
@@ -26,13 +26,10 @@
     </changeSet>
     <changeSet author="zsidom" id="5" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <createTable tableName="SETTLEMENT">
-            <column defaultValueSequenceNext="SEQ_SETTLEMENT" name="ID" type="numeric(22)">
-                <constraints primaryKey="true" primaryKeyName="settlement_pk"/>
-            </column>
+            <column name="ID" type="numeric(22)"/>
             <column defaultValueNumeric="0" name="VERSION" type="numeric"/>
             <column name="NAME" type="varchar(255)"/>
             <column name="POPULATION" type="numeric(22)"/>
-            <!--<column name="created_date" type="TIME WITHOUT TIME ZONE"/>-->
         </createTable>
     </changeSet>
     <changeSet author="zsidom" id="6" objectQuotingStrategy="QUOTE_ALL_OBJECTS">

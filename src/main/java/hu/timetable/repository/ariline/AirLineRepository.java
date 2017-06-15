@@ -13,9 +13,5 @@ import java.util.List;
  * Created by zsidm on 2017. 06. 14..
  */
 @Repository
-//@RepositoryRestResource(path = "airline")
 public interface AirLineRepository extends JpaRepository<AirLine,Integer> {
-
-    @Query("select a.flightList from AirLine a where a.name = :pName")
-    List<Flight> findFlightsByAirLineName(@Param("pName") String name);
 }

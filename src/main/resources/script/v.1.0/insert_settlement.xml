@@ -7,16 +7,46 @@
     <changeSet author="zsidom" id="insert settlement">
         <insert schemaName="public"
                 tableName="SETTLEMENT">
-            <column name="ID" valueSequenceNext="SEQ_SETTLEMENT"/>
-            <column name="NAME" value="BUDAPEST"/>
+            <column name="ID" value="1"/>
+            <column name="NAME" value="Budapest"/>
             <column name="POPULATION" value="2000000"/>
         </insert>
         <insert schemaName="public"
                 tableName="SETTLEMENT   ">
-            <column name="ID" valueSequenceNext="SEQ_SETTLEMENT"/>
-            <column name="NAME" value="BÉCS"/>
-            <column name="POPULATION" value="20000000"/>
+            <column name="ID" value="2"/>
+            <column name="NAME" value="Bécs"/>
+            <column name="POPULATION" value="10000000"/>
         </insert>
+        <insert schemaName="public"
+                tableName="SETTLEMENT   ">
+            <column name="ID" value="3"/>
+            <column name="NAME" value="Berlin"/>
+            <column name="POPULATION" value="15000000"/>
+        </insert>
+        <insert schemaName="public"
+                tableName="SETTLEMENT   ">
+            <column name="ID" value="4"/>
+            <column name="NAME" value="Párizs"/>
+            <column name="POPULATION" value="25000000"/>
+        </insert>
+        <insert schemaName="public"
+                tableName="SETTLEMENT   ">
+            <column name="ID" value="5"/>
+            <column name="NAME" value="London"/>
+            <column name="POPULATION" value="30000000"/>
+        </insert>
+        <!--<insert schemaName="public"-->
+                <!--tableName="SETTLEMENT   ">-->
+            <!--<column name="ID" value="6"/>-->
+            <!--<column name="NAME" value="New York"/>-->
+            <!--<column name="POPULATION" value="55000000"/>-->
+        <!--</insert>-->
+        <!--<insert schemaName="public"-->
+                <!--tableName="SETTLEMENT   ">-->
+            <!--<column name="ID" value="7"/>-->
+            <!--<column name="NAME" value="Los Angeles"/>-->
+            <!--<column name="POPULATION" value="4000000"/>-->
+        <!--</insert>-->
     </changeSet>
 
 </databaseChangeLog>

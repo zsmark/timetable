@@ -1,6 +1,7 @@
 package hu.timetable.api.airline.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import hu.timetable.api.common.entity.AbstractEntity;
 import hu.timetable.api.flight.entity.Flight;
@@ -19,6 +20,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "AIR_LINE")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class AirLine extends AbstractEntity{
 
     @JsonIgnore
@@ -37,4 +39,19 @@ public class AirLine extends AbstractEntity{
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "airLineId")
     private List<Flight> flightList = new ArrayList<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AirLine airLine = (AirLine) o;
+
+        return name != null ? name.equals(airLine.name) : airLine.name == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return name != null ? name.hashCode() : 0;
+    }
 }

@@ -22,7 +22,4 @@ public class AirLineService {
         return airLineRepository.findAll();
     }
 
-    public List<Flight> findFlightsByName(String name) {
-        return airLineRepository.findFlightsByAirLineName(name);
-    }
 }

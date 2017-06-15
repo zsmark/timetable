@@ -20,6 +20,9 @@ public class AirLineController {
     private final String AIRLINE_CONTEXT = "/airLine/";
 
     @Autowired
+    private FlightService flightService;
+
+    @Autowired
     private AirLineService airLineService;
 
     @RequestMapping(AIRLINE_CONTEXT + "findAll")
@@ -29,6 +32,6 @@ public class AirLineController {
 
     @RequestMapping(AIRLINE_CONTEXT + "findFlightsByAirLine")
     public List<Flight> findFlightsByAirLine(@RequestParam(name = "name") String name){
-        return airLineService.findFlightsByName(name);
+        return flightService.findFlightsByName(name);
     }
 }
