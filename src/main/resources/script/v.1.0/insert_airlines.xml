@@ -6,8 +6,18 @@
     <changeSet author="zsidom" id="insert airline">
         <insert schemaName="public"
                 tableName="AIR_LINE">
-            <column name="ID" valueSequenceNext="SEQ_AIR_LINE"/>
+            <column name="ID" value="1"/>
             <column name="NAME" value="WizzAir"/>
+        </insert>
+        <insert schemaName="public"
+                tableName="AIR_LINE">
+            <column name="ID" value="2"/>
+            <column name="NAME" value="RyanAir"/>
+        </insert>
+        <insert schemaName="public"
+                tableName="AIR_LINE">
+            <column name="ID" value="3"/>
+            <column name="NAME" value="KLM"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

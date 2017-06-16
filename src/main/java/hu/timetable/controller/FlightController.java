@@ -2,6 +2,7 @@ package hu.timetable.controller;
 
 import hu.timetable.api.flight.entity.Flight;
 import hu.timetable.api.route.dto.RouteDto;
+import hu.timetable.api.route.dto.RouteDtoWithoutAirLine;
 import hu.timetable.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +34,10 @@ public class FlightController {
 
     @RequestMapping(path = FLIGHT_CONTEXT + "findRouteByAirlines")
     public List<RouteDto> findRouteByAirlines(){
-        return service.findRouteBetweenCitiesByAirlines();
+        return service.findShortestRouteBetweenCitiesByAirlines();
+    }
+    @RequestMapping(path = FLIGHT_CONTEXT + "findRoute")
+    public RouteDtoWithoutAirLine findRoute(){
+        return service.findShortestRouteBetweenCities();
     }
 }

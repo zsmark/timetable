@@ -25,10 +25,6 @@ public class AirLine extends AbstractEntity{
 
     @JsonIgnore
     @javax.persistence.Id
-    @GenericGenerator(name = "SEQ_AIR_LINE", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-            parameters = {@org.hibernate.annotations.Parameter(name = "sequence_name", value = "SEQ_AIR_LINE"),
-                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "1")})
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_AIR_LINE")
     @Column(name = "ID", unique = true, nullable = false, precision = 22)
     private Integer id;
 

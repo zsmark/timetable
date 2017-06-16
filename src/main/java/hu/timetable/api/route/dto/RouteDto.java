@@ -1,6 +1,7 @@
 package hu.timetable.api.route.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import hu.timetable.api.airline.entity.AirLine;
 import hu.timetable.api.flight.entity.Flight;
 import hu.timetable.api.settlement.entity.Settlement;
@@ -16,19 +17,20 @@ import java.util.List;
  */
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RouteDto {
-    private Settlement smallestCity;
-    private Settlement bigestCity;
+public class RouteDto extends AbstractRouteDto {
+    @JsonProperty("légitársaság")
     private AirLine airLine;
+    @JsonProperty("útvonal")
     private List<Flight> route;
-    private String message;
-    private Long sumDistance;
-    private String sumTime;
+
+    public RouteDto(Settlement smallestCity, Settlement biggestCity, AirLine airLine, List<Flight> route, String message, Long sumDistance, String sumTime) {
+        super(smallestCity, biggestCity, message, sumDistance, sumTime);
+        this.airLine = airLine;
+        this.route = route;
+    }
 
     public RouteDto(String message) {
-        this.message = message;
+        super(message);
     }
 }

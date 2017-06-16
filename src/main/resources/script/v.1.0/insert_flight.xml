@@ -3,30 +3,30 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation=" http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <changeSet author="zsidom" id="insert flight">
+    <changeSet author="zsidom" id="insert wizzair flights">
         <insert schemaName="public"
                 tableName="FLIGHT">
             <column name="ID" valueSequenceNext="SEQ_FLIGHT"/>
             <column name="AIR_LINE_ID" value="1"/>
-            <column name="DISTANCE" value="200"/>
+            <column name="DISTANCE" value="2000"/>
             <column name="PERIOD" value="02:00:00"/>
             <column name="DEPARTURE" value="1"/>
             <column name="DESTINATION" value="2"/>
         </insert>
-        <!--<insert schemaName="public"-->
-                <!--tableName="FLIGHT">-->
-            <!--<column name="ID" valueSequenceNext="SEQ_FLIGHT"/>-->
-            <!--<column name="AIR_LINE_ID" value="1"/>-->
-            <!--<column name="DISTANCE" value="300"/>-->
-            <!--<column name="PERIOD" value="03:00:00"/>-->
-            <!--<column name="DEPARTURE" value="1"/>-->
-            <!--<column name="DESTINATION" value="3"/>-->
-        <!--</insert>-->
         <insert schemaName="public"
                 tableName="FLIGHT">
             <column name="ID" valueSequenceNext="SEQ_FLIGHT"/>
             <column name="AIR_LINE_ID" value="1"/>
-            <column name="DISTANCE" value="150"/>
+            <column name="DISTANCE" value="3000"/>
+            <column name="PERIOD" value="03:00:00"/>
+            <column name="DEPARTURE" value="1"/>
+            <column name="DESTINATION" value="3"/>
+        </insert>
+        <insert schemaName="public"
+                tableName="FLIGHT">
+            <column name="ID" valueSequenceNext="SEQ_FLIGHT"/>
+            <column name="AIR_LINE_ID" value="1"/>
+            <column name="DISTANCE" value="1500"/>
             <column name="PERIOD" value="03:00:00"/>
             <column name="DEPARTURE" value="2"/>
             <column name="DESTINATION" value="3"/>
@@ -35,7 +35,7 @@
                 tableName="FLIGHT">
             <column name="ID" valueSequenceNext="SEQ_FLIGHT"/>
             <column name="AIR_LINE_ID" value="1"/>
-            <column name="DISTANCE" value="100"/>
+            <column name="DISTANCE" value="1000"/>
             <column name="PERIOD" value="03:00:00"/>
             <column name="DEPARTURE" value="2"/>
             <column name="DESTINATION" value="4"/>
@@ -44,7 +44,7 @@
                 tableName="FLIGHT">
             <column name="ID" valueSequenceNext="SEQ_FLIGHT"/>
             <column name="AIR_LINE_ID" value="1"/>
-            <column name="DISTANCE" value="200"/>
+            <column name="DISTANCE" value="2000"/>
             <column name="PERIOD" value="03:00:00"/>
             <column name="DEPARTURE" value="4"/>
             <column name="DESTINATION" value="5"/>
@@ -53,10 +53,122 @@
                 tableName="FLIGHT">
             <column name="ID" valueSequenceNext="SEQ_FLIGHT"/>
             <column name="AIR_LINE_ID" value="1"/>
-            <column name="DISTANCE" value="100"/>
+            <column name="DISTANCE" value="1000"/>
             <column name="PERIOD" value="03:00:00"/>
             <column name="DEPARTURE" value="3"/>
             <column name="DESTINATION" value="5"/>
+        </insert>
+    </changeSet>
+    <changeSet author="zsidom" id="insert ryanair flights">
+        <insert schemaName="public"
+                tableName="FLIGHT">
+            <column name="ID" valueSequenceNext="SEQ_FLIGHT"/>
+            <column name="AIR_LINE_ID" value="2"/>
+            <column name="DISTANCE" value="4000"/>
+            <column name="PERIOD" value="03:00:00"/>
+            <column name="DEPARTURE" value="1"/>
+            <column name="DESTINATION" value="4"/>
+        </insert>
+        <insert schemaName="public"
+                tableName="FLIGHT">
+            <column name="ID" valueSequenceNext="SEQ_FLIGHT"/>
+            <column name="AIR_LINE_ID" value="2"/>
+            <column name="DISTANCE" value="500"/>
+            <column name="PERIOD" value="03:00:00"/>
+            <column name="DEPARTURE" value="6"/>
+            <column name="DESTINATION" value="5"/>
+        </insert>
+        <insert schemaName="public"
+                tableName="FLIGHT">
+            <column name="ID" valueSequenceNext="SEQ_FLIGHT"/>
+            <column name="AIR_LINE_ID" value="2"/>
+            <column name="DISTANCE" value="5000"/>
+            <column name="PERIOD" value="03:00:00"/>
+            <column name="DEPARTURE" value="3"/>
+            <column name="DESTINATION" value="7"/>
+        </insert>
+        <insert schemaName="public"
+                tableName="FLIGHT">
+            <column name="ID" valueSequenceNext="SEQ_FLIGHT"/>
+            <column name="AIR_LINE_ID" value="2"/>
+            <column name="DISTANCE" value="1000"/>
+            <column name="PERIOD" value="03:00:00"/>
+            <column name="DEPARTURE" value="3"/>
+            <column name="DESTINATION" value="8"/>
+        </insert>
+        <insert schemaName="public"
+                tableName="FLIGHT">
+            <column name="ID" valueSequenceNext="SEQ_FLIGHT"/>
+            <column name="AIR_LINE_ID" value="2"/>
+            <column name="DISTANCE" value="1000"/>
+            <column name="PERIOD" value="03:00:00"/>
+            <column name="DEPARTURE" value="8"/>
+            <column name="DESTINATION" value="6"/>
+        </insert>
+    </changeSet>
+    <changeSet author="zsidom" id="insert KLM flights">
+        <insert schemaName="public"
+                tableName="FLIGHT">
+            <column name="ID" valueSequenceNext="SEQ_FLIGHT"/>
+            <column name="AIR_LINE_ID" value="3"/>
+            <column name="DISTANCE" value="2000"/>
+            <column name="PERIOD" value="02:00:00"/>
+            <column name="DEPARTURE" value="1"/>
+            <column name="DESTINATION" value="2"/>
+        </insert>
+        <insert schemaName="public"
+                tableName="FLIGHT">
+            <column name="ID" valueSequenceNext="SEQ_FLIGHT"/>
+            <column name="AIR_LINE_ID" value="3"/>
+            <column name="DISTANCE" value="2800"/>
+            <column name="PERIOD" value="02:00:00"/>
+            <column name="DEPARTURE" value="1"/>
+            <column name="DESTINATION" value="4"/>
+        </insert>
+        <insert schemaName="public"
+                tableName="FLIGHT">
+            <column name="ID" valueSequenceNext="SEQ_FLIGHT"/>
+            <column name="AIR_LINE_ID" value="3"/>
+            <column name="DISTANCE" value="1500"/>
+            <column name="PERIOD" value="03:00:00"/>
+            <column name="DEPARTURE" value="2"/>
+            <column name="DESTINATION" value="4"/>
+        </insert>
+        <insert schemaName="public"
+                tableName="FLIGHT">
+            <column name="ID" valueSequenceNext="SEQ_FLIGHT"/>
+            <column name="AIR_LINE_ID" value="3"/>
+            <column name="DISTANCE" value="100"/>
+            <column name="PERIOD" value="03:00:00"/>
+            <column name="DEPARTURE" value="3"/>
+            <column name="DESTINATION" value="6"/>
+        </insert>
+        <insert schemaName="public"
+                tableName="FLIGHT">
+            <column name="ID" valueSequenceNext="SEQ_FLIGHT"/>
+            <column name="AIR_LINE_ID" value="3"/>
+            <column name="DISTANCE" value="200"/>
+            <column name="PERIOD" value="03:00:00"/>
+            <column name="DEPARTURE" value="4"/>
+            <column name="DESTINATION" value="6"/>
+        </insert>
+        <insert schemaName="public"
+                tableName="FLIGHT">
+            <column name="ID" valueSequenceNext="SEQ_FLIGHT"/>
+            <column name="AIR_LINE_ID" value="3"/>
+            <column name="DISTANCE" value="500"/>
+            <column name="PERIOD" value="03:00:00"/>
+            <column name="DEPARTURE" value="6"/>
+            <column name="DESTINATION" value="5"/>
+        </insert>
+        <insert schemaName="public"
+                tableName="FLIGHT">
+            <column name="ID" valueSequenceNext="SEQ_FLIGHT"/>
+            <column name="AIR_LINE_ID" value="3"/>
+            <column name="DISTANCE" value="5000"/>
+            <column name="PERIOD" value="03:00:00"/>
+            <column name="DEPARTURE" value="3"/>
+            <column name="DESTINATION" value="7"/>
         </insert>
     </changeSet>
 

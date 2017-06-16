@@ -69,10 +69,17 @@ public class Flight extends AbstractEntity implements Comparable<Flight>{
         return distance + " km";
     }
 
+    @JsonIgnore
     @Transient
     private List<Flight> adjacentFlights = new LinkedList<>();
+
+    @JsonIgnore
     @Transient
     private List<Flight> shortestPath = new LinkedList<>();
+
+    @JsonIgnore
+    @Transient
+    private Long sumDist;
 
     @Override
     public boolean equals(Object o) {
