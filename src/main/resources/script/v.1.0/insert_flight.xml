@@ -9,7 +9,7 @@
             <column name="ID" valueSequenceNext="SEQ_FLIGHT"/>
             <column name="AIR_LINE_ID" value="1"/>
             <column name="DISTANCE" value="2000"/>
-            <column name="PERIOD" value="02:00:00"/>
+            <column name="PERIOD" value="02:25:00"/>
             <column name="DEPARTURE" value="1"/>
             <column name="DESTINATION" value="2"/>
         </insert>
@@ -18,7 +18,7 @@
             <column name="ID" valueSequenceNext="SEQ_FLIGHT"/>
             <column name="AIR_LINE_ID" value="1"/>
             <column name="DISTANCE" value="3000"/>
-            <column name="PERIOD" value="03:00:00"/>
+            <column name="PERIOD" value="03:10:00"/>
             <column name="DEPARTURE" value="1"/>
             <column name="DESTINATION" value="3"/>
         </insert>
@@ -27,7 +27,7 @@
             <column name="ID" valueSequenceNext="SEQ_FLIGHT"/>
             <column name="AIR_LINE_ID" value="1"/>
             <column name="DISTANCE" value="1500"/>
-            <column name="PERIOD" value="03:00:00"/>
+            <column name="PERIOD" value="03:20:00"/>
             <column name="DEPARTURE" value="2"/>
             <column name="DESTINATION" value="3"/>
         </insert>
@@ -36,7 +36,7 @@
             <column name="ID" valueSequenceNext="SEQ_FLIGHT"/>
             <column name="AIR_LINE_ID" value="1"/>
             <column name="DISTANCE" value="1000"/>
-            <column name="PERIOD" value="03:00:00"/>
+            <column name="PERIOD" value="03:15:00"/>
             <column name="DEPARTURE" value="2"/>
             <column name="DESTINATION" value="4"/>
         </insert>
@@ -45,7 +45,7 @@
             <column name="ID" valueSequenceNext="SEQ_FLIGHT"/>
             <column name="AIR_LINE_ID" value="1"/>
             <column name="DISTANCE" value="2000"/>
-            <column name="PERIOD" value="03:00:00"/>
+            <column name="PERIOD" value="03:02:00"/>
             <column name="DEPARTURE" value="4"/>
             <column name="DESTINATION" value="5"/>
         </insert>
@@ -54,7 +54,7 @@
             <column name="ID" valueSequenceNext="SEQ_FLIGHT"/>
             <column name="AIR_LINE_ID" value="1"/>
             <column name="DISTANCE" value="1000"/>
-            <column name="PERIOD" value="03:00:00"/>
+            <column name="PERIOD" value="03:34:00"/>
             <column name="DEPARTURE" value="3"/>
             <column name="DESTINATION" value="5"/>
         </insert>
@@ -73,7 +73,7 @@
                 tableName="FLIGHT">
             <column name="ID" valueSequenceNext="SEQ_FLIGHT"/>
             <column name="AIR_LINE_ID" value="2"/>
-            <column name="DISTANCE" value="500"/>
+            <column name="DISTANCE" value="499"/>
             <column name="PERIOD" value="03:00:00"/>
             <column name="DEPARTURE" value="6"/>
             <column name="DESTINATION" value="5"/>
@@ -121,7 +121,7 @@
             <column name="ID" valueSequenceNext="SEQ_FLIGHT"/>
             <column name="AIR_LINE_ID" value="3"/>
             <column name="DISTANCE" value="2800"/>
-            <column name="PERIOD" value="02:00:00"/>
+            <column name="PERIOD" value="02:04:00"/>
             <column name="DEPARTURE" value="1"/>
             <column name="DESTINATION" value="4"/>
         </insert>
@@ -148,7 +148,7 @@
             <column name="ID" valueSequenceNext="SEQ_FLIGHT"/>
             <column name="AIR_LINE_ID" value="3"/>
             <column name="DISTANCE" value="200"/>
-            <column name="PERIOD" value="03:00:00"/>
+            <column name="PERIOD" value="02:35:00"/>
             <column name="DEPARTURE" value="4"/>
             <column name="DESTINATION" value="6"/>
         </insert>
@@ -157,7 +157,7 @@
             <column name="ID" valueSequenceNext="SEQ_FLIGHT"/>
             <column name="AIR_LINE_ID" value="3"/>
             <column name="DISTANCE" value="500"/>
-            <column name="PERIOD" value="03:00:00"/>
+            <column name="PERIOD" value="03:10:00"/>
             <column name="DEPARTURE" value="6"/>
             <column name="DESTINATION" value="5"/>
         </insert>

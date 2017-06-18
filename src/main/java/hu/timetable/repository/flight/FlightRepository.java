@@ -15,9 +15,6 @@ import java.util.List;
 @Repository
 public interface FlightRepository extends JpaRepository<Flight,Integer>{
 
-//    @Query("select f from Flight f where f.departure.name = :pDeparture and f.destintaion.name = :pDestination")
-//    List<Flight> findByCities(@Param("pDeparture") String departure,@Param("pDestination") String destination);
-
     @Query("select a.flightList from AirLine a where a.name = :pName")
     List<Flight> findFlightsByAirLineName(@Param("pName") String name);
 }

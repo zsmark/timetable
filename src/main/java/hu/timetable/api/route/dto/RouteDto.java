@@ -30,7 +30,8 @@ public class RouteDto extends AbstractRouteDto {
         this.route = route;
     }
 
-    public RouteDto(String message) {
+    public RouteDto(AirLine airLine, String message) {
         super(message);
+        this.airLine = airLine;
     }
 }

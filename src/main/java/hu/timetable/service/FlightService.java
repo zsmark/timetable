@@ -50,10 +50,7 @@ public class FlightService {
         for (AirLine airLine : airLineList) {
             List<Flight> shortestRoute = calculateShortestPathFromSource(airLine.getFlightList(), smallestCity, biggestCity);
             if (shortestRoute.stream().anyMatch(flight -> flight.getDestination().equals(biggestCity))) {
-                String time = DateUtils.formatDate(shortestRoute.stream().map(Flight::getPeriod).reduce((date, date2) -> {
-                    Long milis = date.getTime() + date2.getTime();
-                    return new Date(milis);
-                }).orElse(null));
+                String time = calculateTime(shortestRoute);
                 result.add(new RouteDto(smallestCity
                         , biggestCity
                         , airLine
@@ -61,10 +58,24 @@ public class FlightService {
                         , null
                         , shortestRoute.stream().mapToLong(Flight::getDistance).sum(), time));
             } else {
-                result.add(new RouteDto("Ez a légitársaság nem repül a célra!"));
+                result.add(new RouteDto(airLine,"Ez a légitársaság nem repül a célra!"));
             }
         }
         return result;
+    }
+
+    private String calculateTime(List<Flight> shortestRoute) {
+       return DateUtils.formatDate(shortestRoute.stream().map(Flight::getPeriod).reduce((date, date2) -> {
+           Calendar cal1 = Calendar.getInstance();
+           cal1.setTime(date);
+           int minutesToNextDeparture = (60 - cal1.get(Calendar.MINUTE));
+           cal1.add(Calendar.MINUTE,minutesToNextDeparture);
+           Calendar cal2 = Calendar.getInstance();
+           cal2.setTime(date2);
+           cal1.add(Calendar.HOUR,cal2.get(Calendar.HOUR));
+           cal1.add(Calendar.MINUTE,cal2.get(Calendar.MINUTE));
+           return cal1.getTime();
+        }).orElse(null));
     }
 
     public RouteDtoWithoutAirLine findShortestRouteBetweenCities() {
