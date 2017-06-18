@@ -12,8 +12,6 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
-import java.time.LocalTime;
 import java.util.*;
 
 /**
@@ -35,7 +33,7 @@ public class Flight extends AbstractEntity implements Comparable<Flight>{
     @Column(name = "ID", unique = true, nullable = false, precision = 22)
     private Integer id;
 
-    @JsonIgnore
+    @JsonProperty("Légitársaság")
     @ManyToOne
     @JoinColumn(name = "AIR_LINE_ID")
     private AirLine airLineId;

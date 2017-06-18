@@ -53,7 +53,6 @@ public class FlightService {
                 String time = calculateTime(shortestRoute);
                 result.add(new RouteDto(smallestCity
                         , biggestCity
-                        , airLine
                         , shortestRoute
                         , null
                         , shortestRoute.stream().mapToLong(Flight::getDistance).sum(), time));

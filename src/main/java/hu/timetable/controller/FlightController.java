@@ -40,4 +40,10 @@ public class FlightController {
     public RouteDtoWithoutAirLine findRoute(){
         return service.findShortestRouteBetweenCities();
     }
+
+    @RequestMapping(FLIGHT_CONTEXT + "findFlightsByAirLine")
+    public List<Flight> findFlightsByAirLine(@RequestParam(name = "airLine") String airLine){
+        return service.findFlightsByName(airLine);
+    }
+
 }
