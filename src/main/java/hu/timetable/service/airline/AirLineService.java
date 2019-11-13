@@ -1,4 +1,4 @@
-package hu.timetable.service;
+package hu.timetable.service.airline;
 
 import hu.timetable.api.airline.entity.AirLine;
 import hu.timetable.api.flight.entity.Flight;
@@ -8,9 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * Created by zsidm on 2017. 06. 14..
- */
 @Service
 public class AirLineService {
 

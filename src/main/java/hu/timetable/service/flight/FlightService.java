@@ -1,4 +1,4 @@
-package hu.timetable.service;
+package hu.timetable.service.flight;
 
 import hu.timetable.api.airline.entity.AirLine;
 import hu.timetable.api.flight.entity.Flight;
@@ -6,27 +6,21 @@ import hu.timetable.api.route.dto.RouteDto;
 import hu.timetable.api.route.dto.RouteDtoWithoutAirLine;
 import hu.timetable.api.settlement.entity.Settlement;
 import hu.timetable.repository.ariline.AirLineRepository;
-import hu.timetable.repository.flight.FlightCustomRepository;
 import hu.timetable.repository.flight.FlightRepository;
 import hu.timetable.repository.settlement.SettlementRepository;
 import hu.timetable.service.util.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/**
- * Created by zsidm on 2017. 06. 14..
- */
 @Service
 public class FlightService {
 
     @Autowired
     private FlightRepository flightRepository;
-
-    @Autowired
-    private FlightCustomRepository customFlightRepository;
 
     @Autowired
     private AirLineRepository airLineRepository;
@@ -39,7 +33,7 @@ public class FlightService {
     }
 
     public List<Flight> findByCities(String departure, String destination) {
-        return customFlightRepository.findByCities(departure, destination);
+        return flightRepository.findByCities(departure, destination);
     }
 
     public List<RouteDto> findShortestRouteBetweenCitiesByAirlines() {
@@ -51,30 +45,28 @@ public class FlightService {
             List<Flight> shortestRoute = calculateShortestPathFromSource(airLine.getFlightList(), smallestCity, biggestCity);
             if (shortestRoute.stream().anyMatch(flight -> flight.getDestination().equals(biggestCity))) {
                 String time = calculateTime(shortestRoute);
-                result.add(new RouteDto(smallestCity
+                result.add(new RouteDto(airLine, smallestCity
                         , biggestCity
                         , shortestRoute
                         , null
                         , shortestRoute.stream().mapToLong(Flight::getDistance).sum(), time));
             } else {
-                result.add(new RouteDto(airLine,"Ez a légitársaság nem repül a célra!"));
+                result.add(new RouteDto(airLine, "Ez a légitársaság nem repül a célra!"));
             }
         }
         return result;
     }
 
     private String calculateTime(List<Flight> shortestRoute) {
-       return DateUtils.formatDate(shortestRoute.stream().map(Flight::getPeriod).reduce((date, date2) -> {
-           Calendar cal1 = Calendar.getInstance();
-           cal1.setTime(date);
-           int minutesToNextDeparture = (60 - cal1.get(Calendar.MINUTE));
-           cal1.add(Calendar.MINUTE,minutesToNextDeparture);
-           Calendar cal2 = Calendar.getInstance();
-           cal2.setTime(date2);
-           cal1.add(Calendar.HOUR,cal2.get(Calendar.HOUR));
-           cal1.add(Calendar.MINUTE,cal2.get(Calendar.MINUTE));
-           return cal1.getTime();
-        }).orElse(null));
+        return DateUtils.formatDate(shortestRoute.stream().map(Flight::getFlightTime).reduce((flightTime1, flightTime2) -> {
+            LocalDateTime time1 = DateUtils.getLocalDateTimeFromTimeInMinutes(flightTime1);
+            LocalDateTime time2 = DateUtils.getLocalDateTimeFromTimeInMinutes(flightTime2);
+
+            int minutesToNextDeparture = (DateUtils.MINUTE - time1.getMinute());
+
+            return time1.getHour() * DateUtils.MINUTE + time1.getMinute() + minutesToNextDeparture + time2.getHour() * DateUtils.MINUTE + time2.getMinute();
+
+        }).orElseThrow(() -> new IllegalArgumentException("Nem lehet üres a lista")));
     }
 
     public RouteDtoWithoutAirLine findShortestRouteBetweenCities() {
@@ -82,32 +74,31 @@ public class FlightService {
         Settlement biggestCity = settlementRepository.findBiggestCity();
         List<Flight> flightList = flightRepository.findAll();
         List<Flight> shortestRoute = calculateShortestPathFromSource(flightList, smallestCity, biggestCity);
-        String time = DateUtils.formatDate(shortestRoute.stream().map(Flight::getPeriod).reduce((date, date2) -> {
-            Long milis = date.getTime() + date2.getTime();
-            return new Date(milis);
-        }).orElse(null));
+        String time = DateUtils.formatDate(shortestRoute.stream().mapToInt(Flight::getFlightTime).sum());
 
         List<String> routeInString = shortestRoute
                 .stream()
-                .map(flight -> flight.getAirLineId().getName() + ": " + flight.getDeparture().getName() + " -> " + flight.getDestination().getName())
+                .map(flight -> flight.getAirLineId().getName() + ": " + flight.getDeparture().getName() + " -> " + flight.getDestination().getName() + ": " + flight.getPeriodInString())
                 .collect(Collectors.toList());
 
         return new RouteDtoWithoutAirLine(smallestCity
                 , biggestCity
                 , routeInString
                 , shortestRoute
-                    .stream()
-                    .mapToLong(Flight::getDistance).sum()
+                .stream()
+                .mapToLong(Flight::getDistance).sum()
                 , time);
     }
 
     private List<Flight> calculateShortestPathFromSource(List<Flight> flightList, Settlement smallestCity, Settlement biggestCity) {
         Set<Flight> settledFlights = new HashSet<>();
         Set<Flight> unsettledFlights = new HashSet<>();
-        List<Flight> startPoints = new ArrayList<>();
 
-        startPoints.addAll(flightList.stream().filter(flight -> flight.getDeparture().equals(smallestCity)).collect(Collectors.toList()));
-//        startPoints.forEach(flight -> findRouteForFlight(biggestCity, flight, flightList));
+        List<Flight> startPoints = flightList.
+                stream()
+                .filter(flight -> flight.getDeparture().equals(smallestCity))
+                .collect(Collectors.toList());
+
         findRouteForFlight(biggestCity, flightList);
 
         startPoints.forEach(flight -> {
@@ -115,18 +106,12 @@ public class FlightService {
             unsettledFlights.add(flight);
             findRoutes(settledFlights, unsettledFlights);
         });
-        settledFlights.forEach(flight -> flight.setSumDist(flight.getShortestPath().stream().mapToLong(Flight::getDistance).sum() + flight.getDistance()));
 
         Flight result = settledFlights
                 .stream()
                 .filter(flight -> flight.getDestination().equals(biggestCity))
-                .sorted(Comparator.comparing(Flight::getSumDist))
-                .findFirst().orElse(null);
-
-//        settledFlights
-//                .stream()
-//                .filter(flight -> flight.getDestination().equals(biggestCity))
-//                .sorted(Comparator.comparing(Flight::getSumDist)).collect(Collectors.toList());
+                .min(Comparator.comparing(Flight::getSumDist))
+                .orElse(null);
 
         List<Flight> resultFlightList = new LinkedList<>();
         if (result != null) {
@@ -196,7 +181,7 @@ public class FlightService {
 //        return new ArrayList<>(route);
 //    }
 
-    private List<Flight> findRouteForFlight(Settlement dest,List<Flight> flightList) {
+    private List<Flight> findRouteForFlight(Settlement dest, List<Flight> flightList) {
         List<Flight> route = new LinkedList<>();
 
         Flight currentFlight = flightList
@@ -207,24 +192,19 @@ public class FlightService {
                 .findFirst()
                 .orElse(null);
 
-        if(currentFlight != null) {
+        if (currentFlight != null) {
 
             List<Flight> nextFlight = flightList
                     .stream()
                     .filter(flight1 -> currentFlight.getDestination().equals(flight1.getDeparture()))
                     .filter(flight1 -> flightList.stream().anyMatch(flight2 -> flight1.getDestination().equals(flight2.getDeparture()) || flight1.getDestination().equals(dest)))
-//                    .filter(flight1 -> flight1.getDestination().equals(dest))
                     .collect(Collectors.toList());
 
             route.add(currentFlight);
-//            if (nextFlight.isEmpty()) {
-//                return new ArrayList<>(route);
-//            }
 
             currentFlight.setAdjacentFlights(nextFlight);
 
-//            List<Flight> nexFlightList = flightList.stream().filter(flight1 -> !route.contains(flight1)).collect(Collectors.toList());
-            route.addAll(findRouteForFlight(dest,flightList));
+            route.addAll(findRouteForFlight(dest, flightList));
         }
         return new ArrayList<>(route);
     }

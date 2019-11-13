@@ -9,9 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- * Created by zsidm on 2017. 06. 14..
- */
 @Repository
 public interface AirLineRepository extends JpaRepository<AirLine,Integer> {
 }

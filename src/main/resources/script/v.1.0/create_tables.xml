@@ -4,30 +4,21 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
-    <!--<changeSet author="zsidom" id="1" objectQuotingStrategy="QUOTE_ALL_OBJECTS">-->
-        <!--<createSequence sequenceName="SEQ_AIR_LINE"/>-->
-    <!--</changeSet>-->
     <changeSet author="zsidom" id="2" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <createSequence sequenceName="SEQ_FLIGHT"/>
     </changeSet>
-    <!--<changeSet author="zsidom" id="3" objectQuotingStrategy="QUOTE_ALL_OBJECTS">-->
-        <!--<createSequence sequenceName="SEQ_SETTLEMENT"/>-->
-    <!--</changeSet>-->
 
     <changeSet author="zsidom" id="4" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <createTable tableName="AIR_LINE">
             <column defaultValueSequenceNext="SEQ_AIR_LINE" name="ID" type="numeric(22)">
                 <constraints primaryKey="true" primaryKeyName="air_line_pk"/>
             </column>
-            <column defaultValueNumeric="0" name="VERSION" type="numeric"/>
             <column name="NAME" type="varchar(255)"/>
-            <!--<column name="created_date" type="TIME WITHOUT TIME ZONE"/>-->
         </createTable>
     </changeSet>
     <changeSet author="zsidom" id="5" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <createTable tableName="SETTLEMENT">
             <column name="ID" type="numeric(22)"/>
-            <column defaultValueNumeric="0" name="VERSION" type="numeric"/>
             <column name="NAME" type="varchar(255)"/>
             <column name="POPULATION" type="numeric(22)"/>
         </createTable>
@@ -37,12 +28,11 @@
             <column defaultValueSequenceNext="SEQ_FLIGHT" name="ID" type="numeric(22)">
                 <constraints primaryKey="true" primaryKeyName="flight_pk"/>
             </column>
-            <column defaultValueNumeric="0" name="VERSION" type="numeric"/>
             <column name="DISTANCE" type="numeric(22)"/>
             <column name="AIR_LINE_ID" type="numeric(22)"/>
             <column name="DEPARTURE" type="numeric(22)"/>
             <column name="DESTINATION" type="numeric(22)"/>
-            <column name="PERIOD" type="TIME WITHOUT TIME ZONE"/>
+            <column name="FLIGHT_TIME" type="numeric(22)"/>
         </createTable>
     </changeSet>
 
