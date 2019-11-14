@@ -62,7 +62,6 @@ public class Flight implements Comparable<Flight> {
 
     public Long getSumDist() {
         if (sumDist == null && getShortestPath() != null) {
-//            settledFlights.forEach(flight -> flight.setSumDist(flight.getShortestPath().stream().mapToLong(Flight::getDistance).sum() + flight.getDistance()));
             setSumDist(getShortestPath().stream().mapToLong(Flight::getDistance).sum() + getDistance());
         }
         return sumDist;
