@@ -11,6 +11,9 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+import java.io.Console;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Scanner;
 import java.util.StringJoiner;
@@ -29,13 +32,11 @@ public class ConsoleComponent {
 
     @EventListener(ApplicationReadyEvent.class)
     public void initConsole() {
-
-        Scanner scanner = new Scanner(System.in);
         String line;
 
         printFunctions();
 
-        while ((line = scanner.nextLine()) != null && !line.equals("exit")) {
+        while ((line = getNextLine()) != null && !line.equals("exit")) {
             switch (line) {
                 case "1":
                     printSmallestBiggestCities();
@@ -62,10 +63,9 @@ public class ConsoleComponent {
     }
 
     private void printAllFlightsByCities() {
-        Scanner scanner = new Scanner(System.in);
         String cities;
         System.out.println("Kérem adja meg a városok nevét vesszővel elválasztva: ");
-        while ((cities = scanner.nextLine()) != null && !cities.equals("exit")) {
+        while ((cities = getNextLine()) != null && !cities.equals("exit")) {
             String[] cityArray = cities.split(",");
             List<Flight> result = null;
             if (cityArray.length == 2) {
@@ -83,6 +83,15 @@ public class ConsoleComponent {
                 System.out.println("Nincsen a megadott értékeknek megfelelő találat! Adjon meg újakat vagy írja be az exit szót!");
             }
         }
+    }
+
+    private String getNextLine() {
+        Console console = System.console();
+        if (console != null)
+            return console.readLine();
+
+        Scanner scanner = new Scanner(new InputStreamReader(System.in, StandardCharsets.UTF_8));
+        return scanner.nextLine();
     }
 
     private void printFunctions() {
