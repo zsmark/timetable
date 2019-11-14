@@ -36,7 +36,8 @@ public class RouteDto extends AbstractRouteDto {
                 joiner.add(flight.getDeparture().getName()+ " -> " + flight.getDestination().getName() + ": " + flight.getPeriodInString());
             });
             joiner.add("------");
-            joiner.add("Összesen: " + getSumTime());
+            joiner.add("Összesen (idő): " + getSumTime());
+            joiner.add("Összesen (km): " + getSumDistance() + " km");
         } else {
             joiner.add(getMessage());
         }

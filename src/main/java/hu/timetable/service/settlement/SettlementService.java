@@ -5,6 +5,8 @@ import hu.timetable.repository.settlement.SettlementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SettlementService {
 
@@ -17,5 +19,9 @@ public class SettlementService {
 
     public Settlement findBiggestCity(){
         return settlementRepository.findBiggestCity();
+    }
+
+    public List<Settlement> findAll() {
+        return settlementRepository.findAll();
     }
 }

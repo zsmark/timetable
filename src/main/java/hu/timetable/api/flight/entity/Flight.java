@@ -8,7 +8,6 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -28,7 +27,7 @@ public class Flight implements Comparable<Flight> {
 
     @ManyToOne
     @JoinColumn(name = "AIR_LINE_ID")
-    private AirLine airLineId;
+    private AirLine airLine;
 
     @Column(name = "DISTANCE")
     private Long distance;
@@ -61,8 +60,8 @@ public class Flight implements Comparable<Flight> {
     @Transient
     private Long sumDist;
 
-    public Long getSumDist(){
-        if(sumDist == null && getShortestPath() != null) {
+    public Long getSumDist() {
+        if (sumDist == null && getShortestPath() != null) {
 //            settledFlights.forEach(flight -> flight.setSumDist(flight.getShortestPath().stream().mapToLong(Flight::getDistance).sum() + flight.getDistance()));
             setSumDist(getShortestPath().stream().mapToLong(Flight::getDistance).sum() + getDistance());
         }
@@ -72,5 +71,14 @@ public class Flight implements Comparable<Flight> {
     @Override
     public int compareTo(Flight o) {
         return this.distance.compareTo(o.getDistance());
+    }
+
+    public String getTostringWithAirlineName(){
+        return "Légitársaság: " + getAirLine().getName() + " " + toString();
+    }
+
+    @Override
+    public String toString() {
+        return "Indulás: " + departure.getName() + " Érkezés: " + destination.getName() + " Távolság: " + getDistanceInString() + " Repülési idő: " + getPeriodInString();
     }
 }

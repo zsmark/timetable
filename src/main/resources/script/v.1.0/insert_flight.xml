@@ -73,7 +73,7 @@
                 tableName="FLIGHT">
             <column name="ID" valueSequenceNext="SEQ_FLIGHT"/>
             <column name="AIR_LINE_ID" value="2"/>
-            <column name="DISTANCE" value="499"/>
+            <column name="DISTANCE" value="490"/>
             <column name="FLIGHT_TIME" value="180"/>
             <column name="DEPARTURE" value="6"/>
             <column name="DESTINATION" value="5"/>

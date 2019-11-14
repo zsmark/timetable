@@ -26,10 +26,10 @@ public class FlightCustomRepositoryImpl implements FlightCustomRepository{
         Join<Flight,Settlement> departureItem = root.join("departure");
         Join<Flight,Settlement> destinationItem = root.join("destination");
         if(departure != null){
-            predicateList.add(builder.like(builder.lower(departureItem.get("name")),"%" + departure.toLowerCase() + "%"));
+            predicateList.add(builder.like(builder.lower(departureItem.get("name")),"%" + departure.toLowerCase().trim() + "%"));
         }
         if(destination != null){
-            predicateList.add(builder.like(builder.lower(destinationItem.get("name")),"%" + destination.toLowerCase() + "%"));
+            predicateList.add(builder.like(builder.lower(destinationItem.get("name")),"%" + destination.toLowerCase().trim() + "%"));
         }
 
         Predicate[] predicates = predicateList.toArray(new Predicate[0]);

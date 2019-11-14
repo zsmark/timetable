@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface FlightRepository extends JpaRepository<Flight,Integer>,FlightCustomRepository{
 
-    @Query("select a.flightList from AirLine a where a.name = :pName")
+    @Query("select a.flightList from AirLine a where lower(a.name) = lower(:pName)")
     List<Flight> findFlightsByAirLineName(@Param("pName") String name);
 }

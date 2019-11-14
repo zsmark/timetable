@@ -22,7 +22,8 @@ public class RouteDtoWithoutAirLine extends AbstractRouteDto{
         StringJoiner joiner = new StringJoiner("\n");
         joiner.add(String.join("\n", route));
         joiner.add("-------");
-        joiner.add("Összesen: " + getSumTime());
+        joiner.add("Összesen (idő): " + getSumTime());
+        joiner.add("Összesen (km): " + getSumDistance());
         return joiner.toString();
     }
 }

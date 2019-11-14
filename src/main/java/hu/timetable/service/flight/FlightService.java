@@ -28,10 +28,6 @@ public class FlightService {
     @Autowired
     private SettlementRepository settlementRepository;
 
-    public List<Flight> findAll() {
-        return flightRepository.findAll();
-    }
-
     public List<Flight> findByCities(String departure, String destination) {
         return flightRepository.findByCities(departure, destination);
     }
@@ -78,7 +74,7 @@ public class FlightService {
 
         List<String> routeInString = shortestRoute
                 .stream()
-                .map(flight -> flight.getAirLineId().getName() + ": " + flight.getDeparture().getName() + " -> " + flight.getDestination().getName() + ": " + flight.getPeriodInString())
+                .map(flight -> flight.getAirLine().getName() + ": " + flight.getDeparture().getName() + " -> " + flight.getDestination().getName() + ": " + flight.getPeriodInString())
                 .collect(Collectors.toList());
 
         return new RouteDtoWithoutAirLine(smallestCity
@@ -126,8 +122,7 @@ public class FlightService {
         while (unsettledFlights.size() != 0) {
             Flight currentFlight = getLowestDistanceFlight(unsettledFlights);
             unsettledFlights.remove(currentFlight);
-            for (Flight adjacencyFlight :
-                    currentFlight.getAdjacentFlights()) {
+            for (Flight adjacencyFlight : currentFlight.getAdjacentFlights()) {
                 calculateMinimumDistance(adjacencyFlight, adjacencyFlight.getDistance(), currentFlight);
                 unsettledFlights.add(adjacencyFlight);
             }
@@ -156,30 +151,6 @@ public class FlightService {
             evaluationFlight.setShortestPath(shortestPath);
         }
     }
-
-//    private List<Flight> findRouteForFlight(Settlement dest,List<Flight> flightList) {
-//        Set<Flight> route = new LinkedHashSet<>();
-//
-//        Flight currentFlight = flightList.stream().filter(flight -> flight.getAdjacentFlights().isEmpty()).findAny().orElse(null);
-//
-//        List<Flight> nextFlight = flightList
-//                .stream()
-//                .filter(flight1 -> flight.getDestination().equals(flight1.getDeparture()))
-//                .filter(flight1 -> flightList.stream().anyMatch(flight2 -> flight1.getDestination().equals(flight2.getDeparture()) || flight1.getDestination().equals(dest)))
-//                .collect(Collectors.toList());
-//
-//        route.add(flight);
-//
-//        if (nextFlight.isEmpty()) {
-//            return new ArrayList<>(route);
-//        }
-//
-//        flight.setAdjacentFlights(nextFlight);
-//
-//        List<Flight> nexFlightList = flightList.stream().filter(flight1 -> !route.contains(flight1)).collect(Collectors.toList());
-////        nexFlightList.forEach(flight1 -> route.addAll(findRouteForFlight(dest, flight1, nexFlightList)));
-//        return new ArrayList<>(route);
-//    }
 
     private List<Flight> findRouteForFlight(Settlement dest, List<Flight> flightList) {
         List<Flight> route = new LinkedList<>();

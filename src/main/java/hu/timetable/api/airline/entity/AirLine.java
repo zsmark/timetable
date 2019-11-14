@@ -23,7 +23,11 @@ public class AirLine{
     @Column(name = "NAME")
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "airLineId")
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "airLine")
     private List<Flight> flightList = new ArrayList<>();
 
+    @Override
+    public String toString() {
+        return  name;
+    }
 }
