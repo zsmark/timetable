@@ -28,7 +28,7 @@ public class ConsoleComponent {
     private AirLineService airLineService;
 
     @EventListener(ApplicationReadyEvent.class)
-    public void afterStartup() {
+    public void initConsole() {
 
         Scanner scanner = new Scanner(System.in);
         String line;
